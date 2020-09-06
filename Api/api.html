@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <h1>JSON</h1>
+  <h2>JavaScript Object Notation</h2>
+  <!-- get request -->
+  <!-- <ul id="users-container"></ul> -->
+
+  <!-- post request -->
+  <input id="title" type="text" placeholder="Title"><br>
+  <input id="description" type="text" placeholder="Description"><br>
+  <button id="submit">Submit</button>
+  <script>
+    //--GET Request
+
+    // fetch('https://jsonplaceholder.typicode.com/users')
+    //   .then(response => response.json())
+    //   .then(json => displayUser(json))
+    // function displayUser(usersArray){
+    //   const userNames=usersArray.map(userObject=>userObject.username);
+    //   const ul=document.getElementById("users-container");
+    //   for (let i = 0; i < userNames.length; i++) {
+    //     const userName = userNames[i];
+    //     const li=document.createElement('li')
+    //     li.innerText=userName;
+    //     ul.appendChild(li);
+
+    //   }
+    //   console.log(usersArray.length);
+    // }
+    //   //  fetch('https://jsonplaceholder.typicode.com/p')
+    //   // .then(response => response.json())
+    //   // .then(json=>console.log(json))
+    //   // .catch(error=>console.log(error))
+
+
+    //--POST Request
+
+    document.getElementById("submit").addEventListener('click', function () {
+      const title = document.getElementById("title").value;
+      const description = document.getElementById("description").value;
+      const postInfo = { title: title, description: description };
+      postToServer(postInfo);
+    })
+    function postToServer(postInfo) {
+
+      fetch('https://jsonplaceholder.typicode.com/posts', {
+        method: 'POST',
+        body: JSON.stringify(postInfo),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8"
+        }
+      })
+        .then(response => response.json())
+        .then(json => console.log(json))
+    }
+
+  </script>
+</body>
+
+</html>
